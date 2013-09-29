@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IBookModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="IBookModelStoreContainer">
+          <EntitySet Name="Books" EntityType="IBookModel.Store.Books" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="ISBN" />
+          </Key>
+          <Property Name="ISBN" Type="char" Nullable="false" MaxLength="13" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Author" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Lang" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="Score" Type="numeric" Nullable="false" Precision="3" Scale="1" />
+          <Property Name="Votes" Type="int" Nullable="false" />
+          <Property Name="OnBoard" Type="bit" Nullable="false" />
+          <Property Name="DataSource" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="EntryTime" Type="datetime" Nullable="false" />
+          <Property Name="ReadMark" Type="bit" Nullable="false" />
+          <Property Name="NewMark" Type="bit" Nullable="false" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IBookModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="IBookEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="IBookModel.Books" />
+        </EntityContainer>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="ISBN" />
+          </Key>
+          <Property Type="String" Name="ISBN" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Author" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Lang" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Type="Decimal" Name="Score" Nullable="false" Precision="3" Scale="1" />
+          <Property Type="Int32" Name="Votes" Nullable="false" />
+          <Property Type="Boolean" Name="OnBoard" Nullable="false" />
+          <Property Type="String" Name="DataSource" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="EntryTime" Nullable="false" Precision="3" />
+          <Property Type="Boolean" Name="ReadMark" Nullable="false" />
+          <Property Type="Boolean" Name="NewMark" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IBookModelStoreContainer" CdmEntityContainer="IBookEntities">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="IBookModel.Books">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="NewMark" ColumnName="NewMark" />
+                <ScalarProperty Name="ReadMark" ColumnName="ReadMark" />
+                <ScalarProperty Name="EntryTime" ColumnName="EntryTime" />
+                <ScalarProperty Name="DataSource" ColumnName="DataSource" />
+                <ScalarProperty Name="OnBoard" ColumnName="OnBoard" />
+                <ScalarProperty Name="Votes" ColumnName="Votes" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Lang" ColumnName="Lang" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

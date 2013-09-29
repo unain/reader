@@ -1,0 +1,26 @@
+﻿SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Books](
+	[ISBN] [char](13) COLLATE Chinese_PRC_CI_AS NOT NULL,
+	[Title] [nvarchar](50) COLLATE Chinese_PRC_CI_AS NOT NULL,
+	[Author] [nvarchar](50) COLLATE Chinese_PRC_CI_AS NOT NULL,
+	[Lang] [char](10) COLLATE Chinese_PRC_CI_AS NOT NULL,
+	[Score] [numeric](3, 1) NOT NULL,
+	[Votes] [int] NOT NULL,
+	[OnBoard] [bit] NOT NULL,
+	[DataSource] [char](2) COLLATE Chinese_PRC_CI_AS NOT NULL,
+	[EntryTime] [datetime] NOT NULL,
+	[ReadMark] [bit] NOT NULL,
+	[NewMark] [bit] NOT NULL,
+ CONSTRAINT [PK_Books] PRIMARY KEY CLUSTERED 
+(
+	[ISBN] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
