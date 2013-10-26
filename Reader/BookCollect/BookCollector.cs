@@ -41,6 +41,7 @@ namespace BookCollect
             book.EntryTime = DateTime.Now;
             book.ReadMark = false;
             book.NewMark = true;
+            book.UpdateTime = DateTime.Now;
            
             return book;
         }
@@ -58,13 +59,21 @@ namespace BookCollect
             {
                 content = Fetcher.LoadPage(uri, PageEncoding);
                 var ISBN = Parser.ParseHtmlSingleNodeContent(content, "//div[@id=\"info\"]/span[last()]/following-sibling::text()[1]", false, true).Trim();
+                var book = GetBookFromPage(content, ISBN);
                 using (var context = new IBookEntities())
                 {
                     if (!context.Books.Any<Books>(b => b.ISBN == ISBN))
                     {
-                        context.Books.AddObject(GetBookFromPage(content, ISBN));
-                        context.SaveChanges();
+                        context.Books.AddObject(book);
                     }
+                    else
+                    {
+                        context.Books.First<Books>(b => b.ISBN == ISBN).Score = book.Score;
+                        context.Books.First<Books>(b => b.ISBN == ISBN).Votes = book.Votes;
+                        context.Books.First<Books>(b => b.ISBN == ISBN).UpdateTime = DateTime.Now;
+                    }
+                    context.SaveChanges();
+
                 }
             }
         }

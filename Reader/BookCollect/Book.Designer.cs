@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
+
 namespace BookCollect
 {
     #region 上下文
@@ -82,7 +82,6 @@ namespace BookCollect
         private ObjectSet<Books> _Books;
 
         #endregion
-
         #region AddTo 方法
     
         /// <summary>
@@ -94,11 +93,11 @@ namespace BookCollect
         }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region 实体
     
     /// <summary>
@@ -125,7 +124,8 @@ namespace BookCollect
         /// <param name="entryTime">EntryTime 属性的初始值。</param>
         /// <param name="readMark">ReadMark 属性的初始值。</param>
         /// <param name="newMark">NewMark 属性的初始值。</param>
-        public static Books CreateBooks(global::System.String iSBN, global::System.String title, global::System.String author, global::System.String lang, global::System.Decimal score, global::System.Int32 votes, global::System.Boolean onBoard, global::System.String dataSource, global::System.DateTime entryTime, global::System.Boolean readMark, global::System.Boolean newMark)
+        /// <param name="updateTime">UpdateTime 属性的初始值。</param>
+        public static Books CreateBooks(global::System.String iSBN, global::System.String title, global::System.String author, global::System.String lang, global::System.Decimal score, global::System.Int32 votes, global::System.Boolean onBoard, global::System.String dataSource, global::System.DateTime entryTime, global::System.Boolean readMark, global::System.Boolean newMark, global::System.DateTime updateTime)
         {
             Books books = new Books();
             books.ISBN = iSBN;
@@ -139,11 +139,11 @@ namespace BookCollect
             books.EntryTime = entryTime;
             books.ReadMark = readMark;
             books.NewMark = newMark;
+            books.UpdateTime = updateTime;
             return books;
         }
 
         #endregion
-
         #region 基元属性
     
         /// <summary>
@@ -412,13 +412,35 @@ namespace BookCollect
         private global::System.Boolean _NewMark;
         partial void OnNewMarkChanging(global::System.Boolean value);
         partial void OnNewMarkChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime UpdateTime
+        {
+            get
+            {
+                return _UpdateTime;
+            }
+            set
+            {
+                OnUpdateTimeChanging(value);
+                ReportPropertyChanging("UpdateTime");
+                _UpdateTime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UpdateTime");
+                OnUpdateTimeChanged();
+            }
+        }
+        private global::System.DateTime _UpdateTime;
+        partial void OnUpdateTimeChanging(global::System.DateTime value);
+        partial void OnUpdateTimeChanged();
 
         #endregion
-
     
     }
 
     #endregion
-
     
 }
